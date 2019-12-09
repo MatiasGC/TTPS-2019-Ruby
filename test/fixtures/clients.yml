@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cuil_o_cuit: MyString
+  razon_social: MyString
+  condicion_iva: MyString
+  email: MyString
+  telefono_1: 1
+  telefono_2: 1
+
+two:
+  cuil_o_cuit: MyString
+  razon_social: MyString
+  condicion_iva: MyString
+  email: MyString
+  telefono_1: 1
+  telefono_2: 1
