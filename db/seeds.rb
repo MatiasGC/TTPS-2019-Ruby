@@ -12,16 +12,16 @@ p2 = Product.create(codigo_unico: "ymt259820", descripcion:"Yerba Mate Playadito
 p3 = Product.create(codigo_unico: "pso107622", descripcion: "Protector Solar Nivea Sun 208g", detalle: "Protección UVA UVB inmediata. Factor 20. Resistente al agua", monto:250, cantidad_stock: 2)
 p4 = Product.create(codigo_unico: "mml174391", descripcion:"Mermelada Arcor Durazno light 390g", detalle: "Mermelada de durazno reducida 47 por ciento en calorías, libre de gluten", monto: 100, cantidad_stock: 1)
 
-p1.items.create(estado: "disponible", valor_venta: 0)
-p1.items.create(estado: "disponible", valor_venta: 0)
-p1.items.create(estado: "disponible", valor_venta: 0)
-p1.items.create(estado: "disponible", valor_venta: 0)
+p1.items.create(estado: "disponible")
+p1.items.create(estado: "disponible")
+p1.items.create(estado: "disponible")
+p1.items.create(estado: "disponible")
 
-p2.items.create(estado: "disponible", valor_venta: 0)
-p2.items.create(estado: "disponible", valor_venta: 0)
-p2.items.create(estado: "disponible", valor_venta: 0)
+p2.items.create(estado: "disponible")
+p2.items.create(estado: "disponible")
+p2.items.create(estado: "disponible")
 
-p3.items.create(estado: "disponible", valor_venta: 0)
-p3.items.create(estado: "disponible", valor_venta: 0)
+p3.items.create(estado: "disponible")
+p3.items.create(estado: "disponible")
 
-p4.items.create(estado: "disponible", valor_venta: 0)
+p4.items.create(estado: "disponible")

@@ -10,4 +10,5 @@ class Product < ApplicationRecord
 		with: /\A[a-zA-z]{3}[\d]{6}\z/,
 		message: "Debe contener 3 letras seguido de 6 numeros"
 	}
+
 end

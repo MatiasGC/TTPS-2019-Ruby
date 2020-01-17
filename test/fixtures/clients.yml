@@ -1,17 +1,22 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  cuil_o_cuit: MyString
-  razon_social: MyString
-  condicion_iva: MyString
-  email: MyString
-  telefono_1: 1
-  telefono_2: 1
+juan:
+  cuil_o_cuit: 20-32008150-6
+  razon_social: Juan
+  condicion_iva: 1
+  email: juan@gmail.com
 
-two:
-  cuil_o_cuit: MyString
-  razon_social: MyString
-  condicion_iva: MyString
-  email: MyString
-  telefono_1: 1
-  telefono_2: 1
+
+maria:
+  cuil_o_cuit: 1234-5678-4567
+  razon_social: Maria
+  condicion_iva: 2
+  email: maria@gmail.com
+
+
+favio:
+  cuil_o_cuit: 2345347568-35345
+  razon_social: Favio
+  condicion_iva: 1
+  email: favio@gmail.com  
+

@@ -10,21 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_08_180305) do
+ActiveRecord::Schema.define(version: 2019_12_14_001140) do
 
   create_table "clients", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "cuil_o_cuit", null: false
     t.string "razon_social", null: false
-    t.string "condicion_iva", null: false
+    t.integer "condicion_iva", null: false
     t.string "email", null: false
-    t.integer "telefono_1", null: false
-    t.integer "telefono_2"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_clients_on_email"
+  end
+
+  create_table "contacts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.integer "telefono"
+    t.bigint "client_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_id"], name: "index_contacts_on_client_id"
   end
 
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "estado"
+    t.integer "estado", default: 0
     t.decimal "valor_venta", precision: 10
     t.bigint "product_id", null: false
     t.bigint "reservation_id"
@@ -44,10 +51,11 @@ ActiveRecord::Schema.define(version: 2019_12_08_180305) do
     t.integer "cantidad_stock", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["codigo_unico"], name: "index_products_on_codigo_unico"
   end
 
   create_table "reservations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.timestamp "fecha_reserva"
+    t.datetime "fecha_reserva", default: -> { "current_timestamp()" }
     t.bigint "client_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -57,7 +65,7 @@ ActiveRecord::Schema.define(version: 2019_12_08_180305) do
   end
 
   create_table "sells", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.timestamp "fecha_venta", default: -> { "current_timestamp()" }, null: false
+    t.datetime "fecha_venta", default: -> { "current_timestamp()" }, null: false
     t.bigint "client_id", null: false
     t.bigint "user_id", null: false
     t.bigint "reservation_id"
@@ -73,8 +81,10 @@ ActiveRecord::Schema.define(version: 2019_12_08_180305) do
     t.string "password", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["username"], name: "index_users_on_username"
   end
 
+  add_foreign_key "contacts", "clients"
   add_foreign_key "items", "products"
   add_foreign_key "items", "reservations"
   add_foreign_key "items", "sells"

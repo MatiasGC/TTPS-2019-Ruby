@@ -2,12 +2,12 @@
 
 one:
   fecha_venta: 2019-12-08 15:01:24
-  client: one
-  user: one
+  client: favio
+  user: diego
   reservation: one
 
 two:
-  fecha_venta: 2019-12-08 15:01:24
-  client: two
-  user: two
+  fecha_venta: 2019-12-10 15:01:24
+  client: juan
+  user: laura
   reservation: two

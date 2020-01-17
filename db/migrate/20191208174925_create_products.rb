@@ -9,5 +9,6 @@ class CreateProducts < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
+    add_index :products, :codigo_unico
   end
 end

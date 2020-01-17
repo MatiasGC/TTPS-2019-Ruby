@@ -1,15 +1,15 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  codigo_unico: MyString
-  descripcion: MyString
-  detalle: MyText
-  monto: 9.99
-  cantidad_stock: 1
+agua:
+  codigo_unico: agk123456
+  descripcion: Agua Kin 500cc
+  detalle: Agua 100 por ciento natural. Botella plástica no retornable
+  monto: 35.5
+  cantidad_stock: 4
 
-two:
-  codigo_unico: MyString
-  descripcion: MyString
-  detalle: MyText
-  monto: 9.99
-  cantidad_stock: 1
+yerba:
+  codigo_unico: ymt259820
+  descripcion: Yerba Mate Playadito 1kg
+  detalle: Elaborado con Palo, libre de gluten
+  monto: 90
+  cantidad_stock: 3

@@ -1,15 +1,36 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  estado: MyString
-  valor_venta: 9.99
-  product: one
-  reservation: one
-  sell: one
+  estado: disponible
+  valor_venta: 35
+  product: agua
+  reservation: 
+  sell: 
 
 two:
-  estado: MyString
-  valor_venta: 9.99
-  product: two
+  estado: disponible
+  valor_venta: 45
+  product: agua
+  reservation: 
+  sell: 
+
+three:
+  estado: disponible
+  valor_venta: 90
+  product: yerba
+  reservation: 
+  sell: 
+
+four:
+  estado: reservado
+  valor_venta: 90
+  product: yerba
   reservation: two
-  sell: two
+  sell: 
+
+five:
+  estado: vendido
+  valor_venta: 40
+  product: agua
+  reservation: 
+  sell: one

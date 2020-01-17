@@ -2,7 +2,11 @@ class Item < ApplicationRecord
   belongs_to :product
   belongs_to :reservation, optional: true
   belongs_to :sell, optional: true
-	
-	validates :estado, inclusion: { in: %w(disponible reservado vendido), message: "%{value} no es un estado válido" }, presence: true
-	validates :valor_venta, numericality: { only_integer: true }, allow_nil: true, on: :create
+  enum estado: { disponible: 0, reservado: 1, vendido: 2 }
+  validates :valor_venta, numericality: { greater_than: 0 }, allow_nil: true, if: :reservationAndSellAreNil?
+
+  def reservationAndSellAreNil?
+  	(reservation_id == nil && sell_id == nil) 
+  end
 end
+	

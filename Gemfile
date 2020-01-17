@@ -36,3 +36,9 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# Gema para intercambio de información
+gem 'fast_jsonapi', '~> 1.5'
+
+# Gem for ministest/spec
+gem 'minitest-spec-rails', '~> 6.0', '>= 6.0.1'
