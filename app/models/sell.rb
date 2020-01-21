@@ -5,5 +5,5 @@ class Sell < ApplicationRecord
   belongs_to :user
   belongs_to :reservation, optional: true
 
-  validates :fecha_venta, presence: true
+  #validates :fecha_venta, presence: true
 end

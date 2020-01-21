@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
+	post 'usuarios', to: 'users#create'
+
 	get 'productos/', to: 'products#index'
 
 	get 'productos/scarce', to: 'products#scarceProducts'
@@ -13,7 +15,9 @@ Rails.application.routes.draw do
 
   	post 'productos/:codigo/items', to: 'products#create'
 
-  	delete 'productos/:id', to: 'product#destroy'
+  	get 'reservas', to: 'reservations#index'
+
+  	post 'reservas', to: 'reservations#create'
 
 
 end
