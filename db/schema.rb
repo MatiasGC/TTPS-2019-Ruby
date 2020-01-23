@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 2019_12_14_001140) do
   end
 
   create_table "sells", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.datetime "fecha_venta", default: -> { "current_timestamp()" }, null: false
+    t.datetime "fecha_venta", default: -> { "current_timestamp()" }
     t.bigint "client_id", null: false
     t.bigint "user_id", null: false
     t.bigint "reservation_id"

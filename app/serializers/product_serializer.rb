@@ -5,7 +5,8 @@ class ProductSerializer
   attributes :codigo_unico, :descripcion, :detalle, :monto, :cantidad_stock
   has_many :items
 
-  #attributes :valor_mas_alto_item_vendido do |p| 
-  #	p.items.map(&:valor_venta).max  
-  #end
+  attributes :estado_y_valor_venta_item do |p|
+  	p.items.map { |i| [ i.estado, i.valor_venta ] }
+  end
+
 end

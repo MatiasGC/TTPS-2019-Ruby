@@ -1,43 +1,49 @@
 class ProductsController < ApplicationController
 
-  # GET /productos 
   def index
-    render json: ProductSerializer.new(Product.where(cantidad_stock: 1..Float::INFINITY).limit(25))
+    if params[:q] == "scarce"
+      @product = Product.where(cantidad_stock: 1..5).limit(25)
+      render json: ProductSerializer.new(@product, {fields: { product: [ :codigo_unico, :descripcion, :detalle, :monto, :cantidad_stock ] } })
+    elsif params[:q] == "all"
+      @product = Product.all.limit(25)
+      render json: ProductSerializer.new(@product, {fields: { product: [ :codigo_unico, :descripcion, :detalle, :monto, :cantidad_stock ] } })
+    else
+      @product = Product.where(cantidad_stock: 1..Float::INFINITY).limit(25)
+      render json: ProductSerializer.new(@product, {fields: { product: [ :codigo_unico, :descripcion, :detalle, :monto, :cantidad_stock ] } })
+    end
   end
+
+  # GET /productos 
+#  def index
+#    render json: ProductSerializer.new(Product.where(cantidad_stock: 1..Float::INFINITY).limit(25))
+#  end
 
   # GET /productos/all
-  def allProducts
-    render json: ProductSerializer.new(Product.all.limit(25))
-  end
+#  def allProducts
+#    render json: ProductSerializer.new(Product.all.limit(25))
+#  end
 
   # GET /productos/scarce
-  def scarceProducts
-    render json: ProductSerializer.new(Product.where(cantidad_stock: 1..5).limit(25))
-  end
+#  def scarceProducts
+#    render json: ProductSerializer.new(Product.where(cantidad_stock: 1..5).limit(25))
+#  end
 
   # GET /productos/:codigo
   def show
-  	@product = ProductSerializer.new(Product.find_by(codigo_unico: (params[:codigo])))
+  	@product = Product.find_by(codigo_unico: (params[:codigo]))
     if @product
-      render json: @product
+      render json: ProductSerializer.new(@product, {fields: { product: [ :codigo_unico, :descripcion, :detalle, :monto, :cantidad_stock ] } })
     else
       render status: :not_found
     end
   	
   end
 
-#NO TERMINA DE MOSTRAR BIEN LOS DATOS
   # GET /productos/:codigo/items
   def showItems
     @product = Product.find_by(codigo_unico: (params[:codigo]))
     if @product
-      options = {
-        include: [:items], 
-          fields: { items: [:estado, :valor_venta]} 
-      }
-      render json: ProductSerializer.new(@product, { include: [:items], fields: {items: [:estado, :valor_venta]} } )
-      # render json: ProductSerializer.new(@product, { fields: { product: [:descripcion] } } )
-      # render json: @product.items.to_json(:only => ['estado', 'valor_venta'])
+      render json: ProductSerializer.new(@product, { fields: { product: [ :codigo_unico, :descripcion, :cantidad_stock, :estado_y_valor_venta_item ] } })
     else
       render status: :not_found
       #head "404 Not found"

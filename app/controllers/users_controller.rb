@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     if @user.save
       render json: :ok 
     else
-      render json: "Ya existe ese nombre se usuario. Pruebe con otro."     
+      render json: "Ya existe ese nombre se usuario. Pruebe con otro."
     end    
   end
 end

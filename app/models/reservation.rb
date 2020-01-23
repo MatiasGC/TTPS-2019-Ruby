@@ -1,5 +1,5 @@
 class Reservation < ApplicationRecord
-	has_many :items, dependent: :destroy
+	has_many :items, dependent: :nullify
 	has_many :products, through: :items
 	has_one :sell
   belongs_to :client

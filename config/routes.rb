@@ -3,11 +3,13 @@ Rails.application.routes.draw do
 
 	post 'usuarios', to: 'users#create'
 
-	get 'productos/', to: 'products#index'
+	get 'productos', to: 'products#index'
 
-	get 'productos/scarce', to: 'products#scarceProducts'
+#	get 'productos/', to: 'products#index'
 
-	get 'productos', to: 'products#allProducts'
+#	get 'productos/scarce', to: 'products#scarceProducts'
+
+#	get 'productos', to: 'products#allProducts'
 
   	get 'productos/:codigo', to: 'products#show'
 
@@ -18,6 +20,12 @@ Rails.application.routes.draw do
   	get 'reservas', to: 'reservations#index'
 
   	post 'reservas', to: 'reservations#create'
+
+  	get 'ventas', to: 'sells#index'
+
+  	put 'reservas/:id/vender', to: 'reservations#sell_reservation'
+
+  	delete 'reservas/:id', to: 'reservations#destroy'
 
 
 end
