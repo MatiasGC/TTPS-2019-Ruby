@@ -1,16 +1,21 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_user
 
   def index
+  
     if params[:q] == "scarce"
-      @product = Product.where(cantidad_stock: 1..5).limit(25)
+      @product = Product.where(cantidad_stock: 3).limit(25)
       render json: ProductSerializer.new(@product, {fields: { product: [ :codigo_unico, :descripcion, :detalle, :monto, :cantidad_stock ] } })
     elsif params[:q] == "all"
       @product = Product.all.limit(25)
       render json: ProductSerializer.new(@product, {fields: { product: [ :codigo_unico, :descripcion, :detalle, :monto, :cantidad_stock ] } })
-    else
+    elsif params[:q] == nil
       @product = Product.where(cantidad_stock: 1..Float::INFINITY).limit(25)
       render json: ProductSerializer.new(@product, {fields: { product: [ :codigo_unico, :descripcion, :detalle, :monto, :cantidad_stock ] } })
+    else
+      render json: { error: "Envíe un parámetro válido" }, status: 400
     end
+
   end
 
   # GET /productos 
@@ -45,8 +50,7 @@ class ProductsController < ApplicationController
     if @product
       render json: ProductSerializer.new(@product, { fields: { product: [ :codigo_unico, :descripcion, :cantidad_stock, :estado_y_valor_venta_item ] } })
     else
-      render status: :not_found
-      #head "404 Not found"
+      render status: 404
     end
   end
 
@@ -65,11 +69,27 @@ class ProductsController < ApplicationController
         render json: :ok
         
       else
-        render json: "La cantidad de items debe ser mayor a 0"
+        render json: { error: "La cantidad de items debe ser mayor a 0" }, status: 400
+
       end
     else
-      render json: :not_found
+      render json: { error: "No existe el producto" }, status: 404
     end
+  end
+
+
+
+  private
+
+  def authenticate_user
+
+      authenticate_or_request_with_http_token do |token, options|
+        u = User.find_by(token: token)
+        if not u.nil?
+          (u.token_created_at + 30.minutes > Time.now)   
+        end
+      end
+ 
   end
 
 end

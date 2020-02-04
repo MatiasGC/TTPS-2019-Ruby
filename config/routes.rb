@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
 	post 'usuarios', to: 'users#create'
 
+  post 'sesiones', to: 'sessions#createSession'
+
 	get 'productos', to: 'products#index'
 
 #	get 'productos/', to: 'products#index'
@@ -26,6 +28,10 @@ Rails.application.routes.draw do
   	put 'reservas/:id/vender', to: 'reservations#sell_reservation'
 
   	delete 'reservas/:id', to: 'reservations#destroy'
+
+    get 'reservas/:id', to: 'reservations#show'
+
+    get 'ventas/:id', to: 'sells#show'
 
 
 end

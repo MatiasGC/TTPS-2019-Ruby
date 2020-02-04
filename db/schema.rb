@@ -79,6 +79,8 @@ ActiveRecord::Schema.define(version: 2019_12_14_001140) do
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "username", null: false
     t.string "password", null: false
+    t.string "token"
+    t.datetime "token_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["username"], name: "index_users_on_username"

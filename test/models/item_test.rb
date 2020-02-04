@@ -5,8 +5,20 @@ class ItemTest < ActiveSupport::TestCase
 		@item = Item.new
 	end
 
-	test "each item belongs to a product" do 
+	test 'item is created if it has the correct data' do 
+		@item.estado = "disponible"
+		@item.valor_venta = 0
+		@item.product_id = products(:agua).id
+		assert @item.save
+	end
+
+	test 'raise an ArgumentError if estado has an incorrect option' do 
+		assert_raises(ArgumentError) { @item.estado = 'cualquier cosa' }
+	end
+
+	test 'an item has to belong to a product' do 
 		assert_not_nil items(:one).product
+		assert_not_nil items(:two).product
 	end
 
 	test "item is not created if it hasn't a product associated" do 
@@ -15,7 +27,7 @@ class ItemTest < ActiveSupport::TestCase
 		assert_not @item.save
 	end
 
-	test "item should be registered as a reserved item if was reserved by a client" do 
+	test "item should be registered as a reserved item if it was reserved" do 
 		assert_not_nil items(:four).reservation
 	end
 

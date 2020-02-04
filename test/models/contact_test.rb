@@ -1,7 +1,24 @@
 require 'test_helper'
 
 class ContactTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+	setup do 
+		@contact = Contact.new
+	end
+
+	test "a contact is created if it has a client associated" do 
+		@contact.telefono = 123456
+		@contact.client_id = clients(:juan).id
+		assert @contact.save
+	end
+
+	test "a contact is not created if it not has a client associated" do 
+		@contact.telefono = 123456
+		assert_not @contact.save
+	end
+
+	test "a contact is not created if the phone is not a number" do 
+		@contact.telefono = "hola"
+		@contact.client_id = clients(:juan).id
+		assert_not @contact.save
+	end
 end

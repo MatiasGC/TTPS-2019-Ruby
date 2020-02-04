@@ -34,11 +34,18 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
+group :production do
+	gem 'psql'
+	end
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-# Gema para intercambio de información
+# Gem to exchange information
 gem 'fast_jsonapi', '~> 1.5'
 
 # Gem for ministest/spec
 gem 'minitest-spec-rails', '~> 6.0', '>= 6.0.1'
+
+# Gem used to generate token
+gem 'devise', '~> 4.7', '>= 4.7.1'

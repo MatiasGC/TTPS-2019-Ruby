@@ -10,7 +10,13 @@ class SellTest < ActiveSupport::TestCase
 		assert_not @sell.save
 	end
 
-	test "a sell should has a client and a user associated" do  
-		assert sells(:one).valid?
+	test "a sell is created if it has a client and a user associated" do  
+		@sell.client_id = clients(:juan).id
+		@sell.user_id = users(:pedro).id
+		assert @sell.save
+	end
+
+	test "a sell created should have at least one product" do 
+		assert_not_nil sells(:one).items
 	end
 end

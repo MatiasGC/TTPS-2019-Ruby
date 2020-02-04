@@ -1,11 +1,19 @@
 class ReservationSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :fecha_reserva
-  belongs_to :client
+  
   has_many :items, dependent: :destroy
+  has_one :sell
 
-  attributes :email_client do |r|
+  attributes :fecha_de_reserva do |r|
+    r.fecha_reserva
+  end
+
+  attributes :email_cliente do |r|
   	r.client.email
+  end
+
+  attributes :items_reserved do |r|
+    r.items
   end
 
   attributes :razon_social_cliente do |r|
@@ -16,13 +24,13 @@ class ReservationSerializer
   	r.items.map(&:valor_venta).sum
   end
 
-  attributes :user_that_reserved do |r|
+  attributes :usuario_que_reservo do |r|
   	r.user.username
   end
 
-  attributes :products_reserved do |r|
-  	r.products
-  end
+  #attributes :productos_reservados do |r|
+  #	r.products
+  #end
 
 
 end

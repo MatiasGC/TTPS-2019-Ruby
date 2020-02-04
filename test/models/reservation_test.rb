@@ -10,8 +10,15 @@ class ReservationTest < ActiveSupport::TestCase
 		assert_not @reservation.save
 	end
 
-	test "a reservation should has a client and a user associated" do  
-		assert reservations(:one).valid?
+	test "a reservation is created if it has a client and a user associated" do  
+		@reservation.client_id = clients(:juan).id
+		@reservation.user_id = users(:pedro).id
+		assert @reservation.save
 	end
+
+	test "a reservation created should have at least one product" do 
+		assert_not_nil reservations(:one).items
+	end
+
 
 end

@@ -11,3 +11,9 @@ two:
   client: juan
   user: laura
   reservation: two
+
+three:
+  fecha_venta: 2019-12-10 11:01:24
+  client: juan
+  user: laura
+  reservation: 

@@ -3,6 +3,8 @@ class CreateUsers < ActiveRecord::Migration[6.0]
     create_table :users do |t|
       t.string :username, null:false
       t.string :password, null: false
+      t.string :token
+      t.datetime :token_created_at
 
       t.timestamps
     end

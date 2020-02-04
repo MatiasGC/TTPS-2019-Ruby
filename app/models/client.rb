@@ -8,7 +8,7 @@ class Client < ApplicationRecord
 		with: /\A([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})\z/,
 		message: "No es un formato válido"
 	}
-	validates :email, uniqueness: true
+	validates :email, uniqueness: { case_sensitive: false }
 
 	enum condicion_iva: { IVA_Responsable_Inscripto: 1, 
 		IVA_Responsable_no_Inscripto: 2, 

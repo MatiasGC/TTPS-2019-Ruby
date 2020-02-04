@@ -5,11 +5,26 @@ agua:
   descripcion: Agua Kin 500cc
   detalle: Agua 100 por ciento natural. Botella plástica no retornable
   monto: 35.5
-  cantidad_stock: 4
+  cantidad_stock: 3
 
 yerba:
   codigo_unico: ymt259820
   descripcion: Yerba Mate Playadito 1kg
   detalle: Elaborado con Palo, libre de gluten
   monto: 90
-  cantidad_stock: 3
+  cantidad_stock: 1
+
+otro_producto1:
+  codigo_unico: ymt259821
+  descripcion: descripcion de otro producto
+  detalle: detalle de otro producto
+  monto: 90
+  cantidad_stock: 0
+
+
+otro_producto2:
+  codigo_unico: ymt259883
+  descripcion: Yerba Mate Playadito 1kg
+  detalle: Elaborado con Palo, libre de gluten
+  monto: 90
+  cantidad_stock: 20
