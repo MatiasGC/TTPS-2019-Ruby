@@ -82,14 +82,10 @@ class ProductsController < ApplicationController
   private
 
   def authenticate_user
-
-      authenticate_or_request_with_http_token do |token, options|
-        u = User.find_by(token: token)
-        if not u.nil?
-          (u.token_created_at + 30.minutes > Time.now)   
-        end
-      end
- 
+    u = User.find_by(token: request.headers['Authorization'] )
+    if (u.nil? || (not (u.token_created_at + 30.minutes > Time.now)))
+      render json: { error: "Acceso denegado" }, status: 401
+    end
   end
 
 end

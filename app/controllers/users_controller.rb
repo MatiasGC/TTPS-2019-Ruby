@@ -2,10 +2,10 @@ class UsersController < ApplicationController
   
   # POST /usuarios
   def create
-    @u = params[:username]
-    @p = params[:password]
+    @u = params[:u]
+    @p = params[:p]
     if @u && @p
-      @user = User.create(username: params[:username], password: params[:password])
+      @user = User.create(username: params[:u], password: params[:p])
       if @user.save
         render json: :ok 
       else

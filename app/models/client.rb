@@ -2,6 +2,7 @@ class Client < ApplicationRecord
 	has_many :reservations, dependent: :destroy
 	has_many :sells, dependent: :destroy
 	has_many :contacts, dependent: :destroy
+
 	
 
 	validates :email, format:{
@@ -26,4 +27,11 @@ class Client < ApplicationRecord
 		Pequeño_Contribuyente_Eventual_Social: 14 }
 
 	validates :cuil_o_cuit, :razon_social, :condicion_iva, :email, presence: true
+	validate :has_the_client_phone?
+
+	def has_the_client_phone?
+		if self.contacts.blank?
+			errors.add(:contacts, "El cliente debe tener al menos un télefono")
+		end
+	end
 end
