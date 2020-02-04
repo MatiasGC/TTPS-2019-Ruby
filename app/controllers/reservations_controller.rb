@@ -1,5 +1,5 @@
 class ReservationsController < ApplicationController
-	#before_action :authenticate_user
+	before_action :authenticate_user
 
 	# GET /reservas
 	def index	

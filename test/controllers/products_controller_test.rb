@@ -48,24 +48,12 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 		assert_response 404
 	end
 
-	# POST /productos/:codigo/items
-	# Consultar en la clase del martes 4
-=begin
-	test "it should create the quantity of items if the code is ok" do 
-		assert_difference("Item.where(product_id:1, estado:'disponible').count", +2) do 			
-			post "http://localhost:3000/productos/'agk123456'/items",
-				params: { items: 2 }
-			end
-	end	
-=end
-
-
-	test "it should create the quantity of items if the code is ok" do 
+=begin	test "it should create the quantity of items if the code is ok" do 
 		assert_difference("#{products(:yerba).cantidad_stock}", +2) do 			
 			post "http://localhost:3000/productos/ymt259820/items",
 				params: { items: 1 }, as: :json
 			end
 	end
-
+=end
 
 end

@@ -18,21 +18,6 @@ class ProductsController < ApplicationController
 
   end
 
-  # GET /productos 
-#  def index
-#    render json: ProductSerializer.new(Product.where(cantidad_stock: 1..Float::INFINITY).limit(25))
-#  end
-
-  # GET /productos/all
-#  def allProducts
-#    render json: ProductSerializer.new(Product.all.limit(25))
-#  end
-
-  # GET /productos/scarce
-#  def scarceProducts
-#    render json: ProductSerializer.new(Product.where(cantidad_stock: 1..5).limit(25))
-#  end
-
   # GET /productos/:codigo
   def show
   	@product = Product.find_by(codigo_unico: (params[:codigo]))
