@@ -49,6 +49,4 @@ test:
 #
 production:
   <<: *default
-  database: tpi_2019_production
-  username: tpi_2019
-  password: <%= ENV['TPI_2019_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
