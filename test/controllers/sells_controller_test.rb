@@ -8,7 +8,7 @@ class SellsControllerTest < ActionDispatch::IntegrationTest
 	end
 
 	test "should return the sell if the id is correct" do 
-		get "http://localhost:3000/ventas/#{sells(:one).id}", # Debería mandar el usuario que está logueado en ese momento
+		get "http://localhost:3000/ventas/#{sells(:four).id}", # Debería mandar el usuario que está logueado en ese momento
 			headers: { Authorization: users(:pedro).token }
 		assert_response :success
 	end
