@@ -11,6 +11,7 @@ p1 = Product.find_or_create_by!(codigo_unico: "agk123456", descripcion: "Agua Ki
 p2 = Product.find_or_create_by!(codigo_unico: "ymt259820", descripcion:"Yerba Mate Playadito 1kg", detalle: "Elaborado con Palo, libre de gluten", monto:90, cantidad_stock: 3)
 p3 = Product.find_or_create_by!(codigo_unico: "pso107622", descripcion: "Protector Solar Nivea Sun 208g", detalle: "Protección UVA UVB inmediata. Factor 20. Resistente al agua", monto:250, cantidad_stock: 2)
 p4 = Product.find_or_create_by!(codigo_unico: "mml174391", descripcion:"Mermelada Arcor Durazno light 390g", detalle: "Mermelada de durazno reducida 47 por ciento en calorías, libre de gluten", monto: 100, cantidad_stock: 1)
+p5 = Product.find_or_create_by!(codigo_unico: "cai456123"), descripcion: "Leche La Serenísima", detalle: "Leche La Serenísima por 1 litro. Parcialmente descremada", monto: 80, cantidad_stock: 0)
 
 p1.items.create(estado: "disponible", valor_venta: 15)
 p1.items.create(estado: "disponible", valor_venta: 15)

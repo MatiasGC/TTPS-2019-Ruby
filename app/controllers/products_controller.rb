@@ -68,8 +68,11 @@ class ProductsController < ApplicationController
 
   def authenticate_user
     u = User.find_by(token: request.headers['Authorization'] )
-    if (u.nil? || (not (u.token_created_at + 30.minutes > Time.now)))
-      render json: { error: "Acceso denegado" }, status: 401
+    if u.nil?
+      render json: { error: "Acceso Denegado" }, status: 401
+    elsif not (u.token_created_at + 30.minutes > Time.now)
+      u.update(token: nil, token_created_at: nil)
+      render json: { error: "Acceso denegado" }, status: 401  
     end
   end
 
