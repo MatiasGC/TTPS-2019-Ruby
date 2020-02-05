@@ -12,16 +12,17 @@ class SellsController < ApplicationController
 	# GET /ventas/:id
 	def show
 		@sell = Sell.find_by(id: params[:id])
-		if @sell && @sell.user.username == "matiasgc" #aquí hay que reemplazar por usuario logueado en el momento
+		if @sell && @sell.user.username == "diego" #aquí hay que reemplazar por usuario logueado en el momento
 			options = {}
 			sth_include = params[:include]
 			if sth_include
 				options[:include] = [sth_include]
-				render json: SellSerializer.new(@sell, options)
+				render json: SellSerializer.new(@sell, options), status: 200
 			else
-				render json: SellSerializer.new(@sell, { fields: { sell: [ :fecha_venta, :razon_social_cliente, :monto_total_venta ] } })			
+				render json: SellSerializer.new(@sell, { fields: { sell: [ :fecha_venta, :razon_social_cliente, :monto_total_venta ] } }), status: 200			
 			end
-			
+		else
+				render status: 404
 		end
 	end
 
@@ -97,8 +98,8 @@ class SellsController < ApplicationController
   private
 
   def authenticate_user
-    u = User.find_by(token: request.headers['Authorization'] )
-    if (u.nil? || (not (u.token_created_at + 30.minutes > Time.now)))
+    @u = User.find_by(token: request.headers['Authorization'] )
+    if (@u.nil? || (not (@u.token_created_at + 30.minutes > Time.now)))
       render json: { error: "Acceso denegado" }, status: 401
     end
   end

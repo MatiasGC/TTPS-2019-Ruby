@@ -16,9 +16,4 @@ class ContactTest < ActiveSupport::TestCase
 		assert_not @contact.save
 	end
 
-	test "a contact is not created if the phone is not a number" do 
-		@contact.telefono = "hola"
-		@contact.client_id = clients(:juan).id
-		assert_not @contact.save
-	end
 end

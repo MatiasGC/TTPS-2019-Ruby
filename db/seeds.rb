@@ -28,4 +28,5 @@ p4.items.create(estado: "disponible", valor_venta: 100)
 
 User.find_or_create_by!(username: "matias"){|u| u.update(password: "123456")}
 
-Client.find_or_create_by!(cuil_o_cuit: "123456789", razon_social:"cliente1", condicion_iva: 4, email: "cliente1@gmail.com")
+c = Client.new(cuil_o_cuit: "123456789", razon_social:"cliente1", condicion_iva: 4, email: "cliente1@gmail.com").contacts.new(telefono: "2214903456")
+c.save

@@ -3,19 +3,29 @@
 pedro:
   username: pedro1
   password: 123456
+  token: <%= Devise.friendly_token %>
+  token_created_at: <%= Time.now %>
 
 laura:
   username: laura1
   password: 987654
+  token:
+  token_created_at:
 
 diego:
   username: diego1
   password: 1345689
+  token:
+  token_created_at:
 
 martin:
   username: martin1
   password: 1345689
+  token:
+  token_created_at:
 
 usuario5:
   username: usuario5
   password: 1345689
+  token:
+  token_created_at:

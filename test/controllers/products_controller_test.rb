@@ -4,56 +4,51 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
 	test "it is ok if a 'scarce' parameter is passed" do
 		get "http://localhost:3000/productos", 
-			params: { q: "scarce" }
+			params: { q: "scarce" }, headers: { Authorization: users(:pedro).token }
 		assert_response 200
 	end
 
-	test "it is ok if a 'all' parameter is passed" do
+	test "it is ok if an 'all' parameter is passed" do
 		get "http://localhost:3000/productos", 
-			params: { q: "all" }
+			params: { q: "all" }, headers: { Authorization: users(:pedro).token }
 		assert_response 200
 	end
 
 	test "it is ok if no parameter is passed" do
 		get "http://localhost:3000/productos",
-			params: { }
+			params: { }, headers: { Authorization: users(:pedro).token }
 		assert_response 200
 	end
 
 	test "it is failed if a wrong paramater is passed" do
 		get "http://localhost:3000/productos",
-			params: { q: "anything" }
+			params: { q: "anything" }, headers: { Authorization: users(:pedro).token }
 		assert_response 400
 	end
 
 	# GET productos/:codigo
 	test "it should find the product if the code is correct" do
-		get "http://localhost:3000/productos/agk123456"
+		get "http://localhost:3000/productos/agk123456", 
+			headers: { Authorization: users(:pedro).token }
 		assert_response 200
 	end
 
 	test "it should not find the product if the code is incorrect" do
-		get "http://localhost:3000/productos/helloworld"
+		get "http://localhost:3000/productos/helloworld", 
+			headers: { Authorization: users(:pedro).token }
 		assert_response 404
 	end
 
 	# GET productos/:codigo/items
 	test "it should find the product if the code is correct" do 
-		get "http://localhost:3000/productos/agk123456/items"
+		get "http://localhost:3000/productos/agk123456/items", 
+			headers: { Authorization: users(:pedro).token }
 		assert_response 200
 	end
 
 	test "it should not find the product if the code is incorrect" do 
-		get "http://localhost:3000/productos/helloworld/items"
+		get "http://localhost:3000/productos/helloworld/items",
+			headers: { Authorization: users(:pedro).token }
 		assert_response 404
 	end
-
-=begin	test "it should create the quantity of items if the code is ok" do 
-		assert_difference("#{products(:yerba).cantidad_stock}", +2) do 			
-			post "http://localhost:3000/productos/ymt259820/items",
-				params: { items: 1 }, as: :json
-			end
-	end
-=end
-
 end

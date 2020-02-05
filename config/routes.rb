@@ -7,31 +7,27 @@ Rails.application.routes.draw do
 
 	get 'productos', to: 'products#index'
 
-#	get 'productos/', to: 'products#index'
+  get 'productos/:codigo', to: 'products#show'
 
-#	get 'productos/scarce', to: 'products#scarceProducts'
+  get 'productos/:codigo/items', to: 'products#showItems'
 
-#	get 'productos', to: 'products#allProducts'
+  post 'productos/:codigo/items', to: 'products#create'
 
-  	get 'productos/:codigo', to: 'products#show'
+  get 'reservas', to: 'reservations#index'
 
-  	get 'productos/:codigo/items', to: 'products#showItems'
+  post 'reservas', to: 'reservations#create'
 
-  	post 'productos/:codigo/items', to: 'products#create'
+  get 'ventas', to: 'sells#index'
 
-  	get 'reservas', to: 'reservations#index'
+  put 'reservas/:id/vender', to: 'reservations#sell_reservation'
 
-  	post 'reservas', to: 'reservations#create'
+  delete 'reservas/:id', to: 'reservations#destroy'
 
-  	get 'ventas', to: 'sells#index'
+  get 'reservas/:id', to: 'reservations#show'
 
-  	put 'reservas/:id/vender', to: 'reservations#sell_reservation'
+  get 'ventas/:id', to: 'sells#show'
 
-  	delete 'reservas/:id', to: 'reservations#destroy'
-
-    get 'reservas/:id', to: 'reservations#show'
-
-    get 'ventas/:id', to: 'sells#show'
+  post 'ventas', to: 'sells#create'
 
 
 end

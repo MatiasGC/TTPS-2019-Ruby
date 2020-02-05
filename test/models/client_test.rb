@@ -10,7 +10,8 @@ class ClientTest < ActiveSupport::TestCase
 		@client.razon_social = "Jose Gomez"
 		@client.condicion_iva = 5
 		@client.email = "jose@gmail.com"
-		assert @client.save
+		@client.contacts.new(telefono: "2214567890")
+		assert_equal(true, @client.save)
 	end
 
 	test "A client shouldn't be succesfully created if the email is wrong" do
@@ -18,6 +19,7 @@ class ClientTest < ActiveSupport::TestCase
 		@client.razon_social = "Juan Gómez"
 		@client.condicion_iva = 5
 		@client.email = "juancito"
+		@client.contacts.new(telefono: "2214567890")
 		assert_not @client.valid?
 	end
 
@@ -27,6 +29,20 @@ class ClientTest < ActiveSupport::TestCase
 		assert_raises(ArgumentError) { @client.condicion_iva = 900 }
 	end
 
-	#FALTA LA RELACION CON EL CONTACTO ¿COMO HACER PARA QUE SEA OBLIGATORIA?
+	test "A client shouldn't be succesfully created if has not a contact" do 
+		@client.cuil_o_cuit = "20219853456"
+		@client.razon_social = "Jose Gomez"
+		@client.condicion_iva = 5
+		@client.email = "jose@gmail.com"
+		assert_not @client.valid?
+	end
+
+	test "A client shouldn't be succesfully created if it has not a cuil_o_cuit" do
+		@client.razon_social = "Juan Gómez"
+		@client.condicion_iva = 5
+		@client.email = "email@gmail.com"
+		@client.contacts.new(telefono: "2214567890")
+		assert_equal(false, @client.save)
+	end
 
 end

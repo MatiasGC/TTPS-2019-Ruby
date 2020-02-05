@@ -11,8 +11,6 @@ curl -i -X POST -H "Content-Type:application/json" -d '{"items":"2"}' http://loc
 
 El :código puede reemplazar por otro; 'items' es la palabra clave para recuperar la cantidad solicitada para crear nuevos items del producto.
 
-En Curl: $ curl http://localhost:3000/productos -H "Authorization: Token token='el token generado'"
-En Postman en la pestaña Headers como key: Authorization value: el token generado
 
 
 

@@ -29,4 +29,5 @@ class UserTest < ActiveSupport::TestCase
 		@user2.username = 'juan'
 		assert_not @user2.save
 	end
+
 end
