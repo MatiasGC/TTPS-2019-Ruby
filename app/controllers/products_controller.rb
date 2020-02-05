@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
   def index
   
     if params[:q] == "scarce"
-      @product = Product.where(cantidad_stock: 3).limit(25)
+      @product = Product.where(cantidad_stock: 1..5).limit(25)
       render json: ProductSerializer.new(@product, {fields: { product: [ :codigo_unico, :descripcion, :detalle, :monto, :cantidad_stock ] } })
     elsif params[:q] == "all"
       @product = Product.all.limit(25)
@@ -24,7 +24,7 @@ class ProductsController < ApplicationController
     if @product
       render json: ProductSerializer.new(@product, {fields: { product: [ :codigo_unico, :descripcion, :detalle, :monto, :cantidad_stock ] } })
     else
-      render status: :not_found
+      render json: { error: "El producto no existe" }, status: 404
     end
   	
   end
@@ -35,7 +35,7 @@ class ProductsController < ApplicationController
     if @product
       render json: ProductSerializer.new(@product, { fields: { product: [ :codigo_unico, :descripcion, :cantidad_stock, :estado_y_valor_venta_item ] } })
     else
-      render status: 404
+      render json: { error: "El producto no existe" }, status: 404
     end
   end
 
@@ -67,11 +67,11 @@ class ProductsController < ApplicationController
   private
 
   def authenticate_user
-    u = User.find_by(token: request.headers['Authorization'] )
-    if u.nil?
+    @u = User.find_by(token: request.headers['Authorization'] )
+    if @u.nil?
       render json: { error: "Acceso Denegado" }, status: 401
-    elsif not (u.token_created_at + 30.minutes > Time.now)
-      u.update(token: nil, token_created_at: nil)
+    elsif not (@u.token_created_at + 30.minutes > Time.now)
+      @u.update(token: nil, token_created_at: nil)
       render json: { error: "Acceso denegado" }, status: 401  
     end
   end

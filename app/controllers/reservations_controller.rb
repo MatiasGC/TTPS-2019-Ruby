@@ -30,7 +30,7 @@ class ReservationsController < ApplicationController
 			if params[:client_id].blank?
 				errors_messages << "El cliente no existe"
 			end
-			@reservation = Reservation.create(client_id: params[:client_id], user_id: 5)
+			@reservation = Reservation.create(client_id: params[:client_id], user_id: @u.id)
 			can_do_reservation = true
 			for prod in params[:productos]
 				if not exist_product?(prod['codigo_unico'])
@@ -57,6 +57,7 @@ class ReservationsController < ApplicationController
 				end
 				render json: ReservationSerializer.new(@reservation, {fields: {reservation: [:fecha_reserva, :razon_social_cliente, :monto_total_reserva]}})					
 			else
+				# Si no son correctos se envía mensaje con los errores
 				@reservation.destroy
 				render json: errors_messages, status: 404			
 			end
@@ -81,7 +82,7 @@ class ReservationsController < ApplicationController
 	end
 
 	def update_items(items_quantity)
-		i = (Item.where(estado:"disponible", product_id: @producto.id).limit(items_quantity)).update(estado: "reservado", reservation_id: @reservation.id)
+		i = (Item.where(estado:"disponible", product_id: @producto.id).limit(items_quantity)).update(estado: "reservado", valor_venta: @producto.monto, reservation_id: @reservation.id)
 
 	end
 
@@ -173,11 +174,11 @@ class ReservationsController < ApplicationController
   private
 
   def authenticate_user
-    u = User.find_by(token: request.headers['Authorization'] )
-    if u.nil?
+    @u = User.find_by(token: request.headers['Authorization'] )
+    if @u.nil?
       render json: { error: "Acceso Denegado" }, status: 401
-    elsif not (u.token_created_at + 30.minutes > Time.now)
-      u.update(token: nil, token_created_at: nil)
+    elsif not (@u.token_created_at + 30.minutes > Time.now)
+      @u.update(token: nil, token_created_at: nil)
       render json: { error: "Acceso denegado" }, status: 401  
     end
   end

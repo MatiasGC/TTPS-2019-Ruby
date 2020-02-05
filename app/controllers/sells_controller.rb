@@ -3,16 +3,14 @@ class SellsController < ApplicationController
 
 	# GET /ventas
 	def index
-		@sells = Sell.all
-
+		@sells = Sell.where(user_id: @u.id)
 		render json: SellSerializer.new(@sells, { fields: { sell: [ :fecha_venta, :razon_social_cliente, :monto_total_venta ] } })
-
 	end
 
 	# GET /ventas/:id
 	def show
 		@sell = Sell.find_by(id: params[:id])
-		if @sell && @sell.user.username == "diego" #aquí hay que reemplazar por usuario logueado en el momento
+		if @sell && (@sell.user.username == @u.username)
 			options = {}
 			sth_include = params[:include]
 			if sth_include
@@ -22,7 +20,7 @@ class SellsController < ApplicationController
 				render json: SellSerializer.new(@sell, { fields: { sell: [ :fecha_venta, :razon_social_cliente, :monto_total_venta ] } }), status: 200			
 			end
 		else
-				render status: 404
+				render json: { error: "La venta no existe o vos no registraste la venta" }, status: 404
 		end
 	end
 
@@ -34,7 +32,7 @@ class SellsController < ApplicationController
 			if params[:client_id].blank?
 				errors_messages << "El cliente no existe"
 			end
-			@sell = Sell.create(client_id: params[:client_id], user_id: 5)
+			@sell = Sell.create(client_id: params[:client_id], user_id: @u.id)
 			can_do_sell = true
 			for prod in params[:productos]
 				if not exist_product?(prod['codigo_unico'])
@@ -86,7 +84,7 @@ class SellsController < ApplicationController
 	end
 
 	def update_items(items_quantity)
-		i = (Item.where(estado:"disponible", product_id: @producto.id).limit(items_quantity)).update(estado: "vendido", sell_id: @sell.id)
+		i = (Item.where(estado:"disponible", product_id: @producto.id).limit(items_quantity)).update(estado: "vendido", valor_venta: @producto.monto, sell_id: @sell.id)
 
 	end
 
@@ -98,11 +96,11 @@ class SellsController < ApplicationController
   private
 
   def authenticate_user
-    u = User.find_by(token: request.headers['Authorization'] )
-    if u.nil?
+    @u = User.find_by(token: request.headers['Authorization'] )
+    if @u.nil?
       render json: { error: "Acceso Denegado" }, status: 401
-    elsif not (u.token_created_at + 30.minutes > Time.now)
-      u.update(token: nil, token_created_at: nil)
+    elsif not (@u.token_created_at + 30.minutes > Time.now)
+      @u.update(token: nil, token_created_at: nil)
       render json: { error: "Acceso denegado" }, status: 401  
     end
   end

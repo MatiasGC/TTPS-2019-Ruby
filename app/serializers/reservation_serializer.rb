@@ -16,6 +16,10 @@ class ReservationSerializer
     r.items
   end
 
+  attributes :sell do |r|
+    r.sell
+  end
+
   attributes :razon_social_cliente do |r|
   	r.client.razon_social
   end
