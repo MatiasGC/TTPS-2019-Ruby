@@ -75,5 +75,6 @@ class ProductsController < ApplicationController
       render json: { error: "Acceso denegado" }, status: 401  
     end
   end
+  
 
 end
